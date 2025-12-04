@@ -89,7 +89,7 @@ plot_dimensionality_reduction(X, X_independent, y, method='ICA')
 **Autoencoder Example:**
 ```python
 from src.dimensionality_reduction import Autoencoder, AutoencoderTrainer
-from src.utils import load_mnist, get_device
+from src.utils import load_mnist, get_device, plot_training_curves
 
 # Load data
 train_loader = load_mnist(batch_size=128, train=True)
@@ -99,6 +99,9 @@ device = get_device()
 model = Autoencoder(input_dim=784, latent_dim=32)
 trainer = AutoencoderTrainer(model, device=device)
 history = trainer.train(train_loader, n_epochs=20)
+
+# Visualize
+plot_training_curves(history["train_losses"], val_losses=None, title='Training Curves')
 ```
 
 ### Classification
