@@ -167,7 +167,7 @@ samples = model.sample(n_samples=64, device=device)
 plot_image_grid(samples, n_rows=4, n_cols=8, figsize=(12, 6), title='Image Grid')
 ```
 
-**Normalizing Flow Example:**
+**Normalizing Flow Example with Gaussian Mixture:**
 ```python
 from src.generative import RealNVP, NormalizingFlowTrainer
 from src.utils import generate_gaussian_mixture, create_dataloader
@@ -179,6 +179,24 @@ train_loader = create_dataloader(X, batch_size=128)
 # Create and train flow
 device = get_device()
 model = RealNVP(input_dim=2, n_flows=8)
+trainer = NormalizingFlowTrainer(model, device=device)
+history = trainer.train(train_loader, n_epochs=50)
+
+# Generate samples
+samples = model.sample(n_samples=100, device=device)
+```
+
+**Normalizing Flow Example with MNIST:**
+```python
+from src.generative import RealNVP, NormalizingFlowTrainer
+from src.utils import generate_gaussian_mixture, create_dataloader
+
+# Load MNIST dataset
+train_loader = load_mnist(batch_size=128)
+
+# Create and train flow
+device = get_device()
+model = RealNVP(input_dim=784, n_flows=100)
 trainer = NormalizingFlowTrainer(model, device=device)
 history = trainer.train(train_loader, n_epochs=50)
 
