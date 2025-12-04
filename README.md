@@ -170,7 +170,7 @@ plot_image_grid(samples, n_rows=4, n_cols=8, figsize=(12, 6), title='Image Grid'
 **Normalizing Flow Example with Gaussian Mixture:**
 ```python
 from src.generative import RealNVP, NormalizingFlowTrainer
-from src.utils import generate_gaussian_mixture, create_dataloader
+from src.utils import generate_gaussian_mixture, create_dataloader, plot_2d_data
 
 # Generate data
 X = generate_gaussian_mixture(n_samples=1000, n_features=2)
@@ -184,12 +184,15 @@ history = trainer.train(train_loader, n_epochs=50)
 
 # Generate samples
 samples = model.sample(n_samples=100, device=device)
+
+# Visualize
+plot_2d_data(samples, title='Sampled Data Visualization')
 ```
 
 **Normalizing Flow Example with MNIST:**
 ```python
 from src.generative import RealNVP, NormalizingFlowTrainer
-from src.utils import generate_gaussian_mixture, create_dataloader
+from src.utils import generate_gaussian_mixture, create_dataloader, plot_image_grid
 
 # Load MNIST dataset
 train_loader = load_mnist(batch_size=128)
@@ -202,6 +205,9 @@ history = trainer.train(train_loader, n_epochs=50)
 
 # Generate samples
 samples = model.sample(n_samples=100, device=device)
+
+# Visualize
+plot_image_grid(samples, n_rows=4, n_cols=8, figsize=(12, 6), title='Image Grid')
 ```
 
 **Diffusion Model Example:**
