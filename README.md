@@ -81,6 +81,9 @@ from src.dimensionality_reduction import ICA
 # Apply ICA
 ica = ICA(n_components=2)
 X_independent = ica.fit_transform(X)
+
+# Visualize
+plot_dimensionality_reduction(X, X_independent, y, method='ICA')
 ```
 
 **Autoencoder Example:**
