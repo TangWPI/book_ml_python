@@ -213,7 +213,7 @@ plot_image_grid(samples, n_rows=4, n_cols=8, figsize=(12, 6), title='Image Grid'
 **Diffusion Model Example:**
 ```python
 from src.generative import DiffusionModel, DiffusionTrainer
-from src.utils import load_mnist, get_device
+from src.utils import load_mnist, get_device, plot_image_grid
 
 # Load data
 train_loader = load_mnist(batch_size=128, train=True)
@@ -226,6 +226,9 @@ history = trainer.train(train_loader, n_epochs=20)
 
 # Generate samples
 samples = model.sample(n_samples=64, device=device)
+
+# Visualize
+plot_image_grid(samples, n_rows=4, n_cols=8, figsize=(12, 6), title='Image Grid')
 ```
 
 ## Jupyter Notebooks
