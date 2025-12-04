@@ -301,6 +301,10 @@ If you use this code in your research or projects, please cite:
 Tang, B. (2025). Information Theory for Machine Learning: From Theory to Python Practice.
 ```
 
+## About the Author
+
+Dr. Tang is an Associate Professor at Worcester Polytechnic Institute with extensive research and teaching experience at the intersection of information theory and machine learning. His work focuses on statistical machine learning, knowledge discovery, and the theoretical foundations that enable intelligent systems to interpret and act on data.
+
 ## Contact
 
 For questions or feedback, please open an issue on GitHub.
