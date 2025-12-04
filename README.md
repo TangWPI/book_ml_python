@@ -298,7 +298,7 @@ This project is intended for educational purposes as companion code to the textb
 If you use this code in your research or projects, please cite:
 
 ```
-Tang, W. (2025). Information Theory for Machine Learning: From Theory to Python Practice. [Publisher TBD]
+Tang, B. (2025). Information Theory for Machine Learning: From Theory to Python Practice.
 ```
 
 ## Contact
