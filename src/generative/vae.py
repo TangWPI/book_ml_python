@@ -227,8 +227,11 @@ class VAETrainer:
                     data = data.view(data.size(0), -1)
                 
                 # Normalize to [0, 1] if not already
-                if data.min() < 0 or data.max() > 1:
-                    data = (data - data.min()) / (data.max() - data.min())
+                data_min = data.min()
+                data_max = data.max()
+                if data_min < 0 or data_max > 1:
+                    # Add epsilon to prevent division by zero
+                    data = (data - data_min) / (data_max - data_min + 1e-8)
                 
                 optimizer.zero_grad()
                 recon, mu, logvar = self.model(data)
@@ -291,8 +294,10 @@ class VAETrainer:
                 if len(data.shape) > 2:
                     data = data.view(data.size(0), -1)
                 
-                if data.min() < 0 or data.max() > 1:
-                    data = (data - data.min()) / (data.max() - data.min())
+                data_min = data.min()
+                data_max = data.max()
+                if data_min < 0 or data_max > 1:
+                    data = (data - data_min) / (data_max - data_min + 1e-8)
                 
                 recon, mu, logvar = self.model(data)
                 loss, _, _ = vae_loss(recon, data, mu, logvar, beta)

@@ -92,7 +92,7 @@ class KMeans:
         Returns:
             torch.Tensor: New centroids
         """
-        centroids = torch.zeros(self.n_clusters, X.shape[1])
+        centroids = torch.zeros(self.n_clusters, X.shape[1], device=X.device, dtype=X.dtype)
         
         for k in range(self.n_clusters):
             cluster_points = X[labels == k]
@@ -100,7 +100,8 @@ class KMeans:
                 centroids[k] = torch.mean(cluster_points, dim=0)
             else:
                 # If cluster is empty, reinitialize randomly
-                centroids[k] = X[torch.randint(0, X.shape[0], (1,))]
+                random_idx = torch.randint(0, X.shape[0], size=()).item()
+                centroids[k] = X[random_idx]
         
         return centroids
     
