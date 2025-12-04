@@ -241,7 +241,7 @@ The repository supports the following datasets:
 ## Requirements
 
 - Python >= 3.8
-- PyTorch >= 2.0.0
+- PyTorch >= 2.6.0 (recommended for security fixes)
 - NumPy >= 1.24.0
 - Matplotlib >= 3.7.0
 - scikit-learn >= 1.3.0
