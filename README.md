@@ -1,6 +1,6 @@
 # Information Theory for Machine Learning: Python Practice
 
-This repository contains Python implementations of various machine learning algorithms from scratch, designed as companion code for the textbook "Information Theory for Machine Learning: From Theory to Python Practice."
+This repository contains Python implementations of various machine learning algorithms from scratch, designed as companion code for the textbook **"Information Theory for Machine Learning: From Theory to Python Practice."**
 
 ## Overview
 
