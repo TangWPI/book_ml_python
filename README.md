@@ -18,7 +18,7 @@ Both synthetic (Gaussian) and real-world datasets (MNIST, CIFAR-10) are used thr
 ```bash
 # Clone the repository
 git clone https://github.com/TangWPI/book_ml_python.git
-cd book_information_theory_python
+cd book_ml_python
 
 # Install dependencies
 pip install -r requirements.txt
