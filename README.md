@@ -1,6 +1,6 @@
-# Information Theory for Machine Learning: Python Practice
+# Information Theory for Modern Machine Learning: Python Practice
 
-This repository contains Python implementations of various machine learning algorithms from scratch, designed as companion code for the textbook **"Information Theory for Machine Learning: From Theory to Python Practice."**
+This repository contains Python implementations of various machine learning algorithms from scratch, designed as companion code for the textbook "Information Theory for Modern Machine Learning: From Theory to Python Practice."
 
 ## Overview
 
@@ -9,9 +9,9 @@ All algorithms are implemented from scratch using PyTorch and demonstrated in Ju
 - **Dimensionality Reduction**: PCA, ICA, Autoencoder
 - **Classification**: Neural Networks (Multi-layer Perceptron)
 - **Clustering**: K-Means
-- **Generative Learning**: VAE, Normalizing Flow (RealNVP), Diffusion Models (DDPM)
+- **Generative Learning**: VAE, Normalizing Flow (RealNVP), Diffusion Models (DDPM), Transformer for Text Translation
 
-Both synthetic (Gaussian) and real-world datasets (MNIST, CIFAR-10) are used throughout.
+Both synthetic (Gaussian) and real-world datasets (MNIST, CIFAR-10) are used throughout, along with a small English-French translation dataset for the transformer model.
 
 ## Installation
 
@@ -40,7 +40,8 @@ book_information_theory_python/
 │   ├── generative/
 │   │   ├── vae.py                 # Variational Autoencoder
 │   │   ├── normalizing_flow.py    # RealNVP Normalizing Flow
-│   │   └── diffusion.py           # Diffusion Model (DDPM)
+│   │   ├── diffusion.py           # Diffusion Model (DDPM)
+│   │   └── transformer.py         # Transformer for Text Translation
 │   └── utils/
 │       ├── data_loader.py         # Data loading utilities
 │       ├── visualization.py       # Visualization functions
@@ -231,6 +232,73 @@ samples = model.sample(n_samples=64, device=device)
 plot_image_grid(samples, n_rows=4, n_cols=8, figsize=(12, 6), title='Image Grid')
 ```
 
+**Transformer for Text Translation Example:**
+```python
+from src.generative import Transformer, TransformerTrainer
+from src.utils import load_translation_data, get_device, save_checkpoint, load_checkpoint
+
+# Load English-French translation data
+train_loader, val_loader, src_vocab, tgt_vocab = load_translation_data(batch_size=32)
+
+# Create transformer model
+device = get_device()
+model = Transformer(
+    src_vocab_size=src_vocab['vocab_size'],
+    tgt_vocab_size=tgt_vocab['vocab_size'],
+    d_model=256,
+    n_heads=8,
+    n_encoder_layers=3,
+    n_decoder_layers=3,
+    d_ff=512,
+    max_len=50,
+    dropout=0.1
+)
+
+# Train the model
+trainer = TransformerTrainer(model, device=device)
+history = trainer.train(train_loader, n_epochs=50, learning_rate=1e-4, val_loader=val_loader)
+
+# Save trained model
+save_checkpoint(model, 'transformer_translation.pth')
+
+# Load pre-trained model for testing
+model_loaded = Transformer(
+    src_vocab_size=src_vocab['vocab_size'],
+    tgt_vocab_size=tgt_vocab['vocab_size'],
+    d_model=256,
+    n_heads=8,
+    n_encoder_layers=3,
+    n_decoder_layers=3
+)
+load_checkpoint(model_loaded, 'transformer_translation.pth')
+
+# Translate a sentence
+import torch
+def translate_sentence(sentence, model, src_vocab, tgt_vocab, device='cpu'):
+    """Translate an English sentence to French."""
+    model.eval()
+    # Tokenize and convert to indices
+    words = sentence.lower().split()
+    src_indices = [src_vocab['word2idx']['<sos>']] + \
+                  [src_vocab['word2idx'].get(w, src_vocab['word2idx']['<unk>']) for w in words] + \
+                  [src_vocab['word2idx']['<eos>']]
+    src_tensor = torch.LongTensor([src_indices]).to(device)
+    
+    # Translate
+    output = model.translate(src_tensor, max_len=50, device=device)
+    
+    # Convert indices back to words
+    translated_words = [tgt_vocab['idx2word'][idx.item()] for idx in output[0]]
+    # Remove special tokens
+    translated_words = [w for w in translated_words if w not in ['<sos>', '<eos>', '<pad>']]
+    
+    return ' '.join(translated_words)
+
+# Example translation
+translation = translate_sentence("hello", model_loaded, src_vocab, tgt_vocab, device=device)
+print(f"Translation: {translation}")
+```
+
 ## Jupyter Notebooks
 
 Detailed tutorials and experiments are available in the `notebooks/` directory:
@@ -265,12 +333,14 @@ Detailed tutorials and experiments are available in the `notebooks/` directory:
 - **VAE (Variational Autoencoder)**: Probabilistic encoder-decoder with latent sampling
 - **Normalizing Flow (RealNVP)**: Invertible transformations for density estimation
 - **Diffusion Model (DDPM)**: Denoising diffusion probabilistic model
+- **Transformer**: Sequence-to-sequence model with multi-head attention for text translation
 
 ## Datasets
 
 The repository supports the following datasets:
 
 - **Synthetic Gaussian Data**: Customizable multi-cluster Gaussian data
+- **Translation Data**: Small curated English-French phrase pairs for translation tasks
 - **MNIST**: Handwritten digits (28x28 grayscale images)
 - **CIFAR-10**: Natural images (32x32 RGB images, 10 classes)
 
@@ -298,7 +368,7 @@ This project is intended for educational purposes as companion code to the textb
 If you use this code in your research or projects, please cite:
 
 ```
-Tang, B. (2025). Information Theory for Machine Learning: From Theory to Python Practice.
+Tang, B. (2025). Information Theory for Modern Machine Learning: From Theory to Python Practice.
 ```
 
 ## About the Author
