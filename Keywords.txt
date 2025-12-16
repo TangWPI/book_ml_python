@@ -1,0 +1,9 @@
+Keywords:
+
+Machine Learning
+Information Theory
+Neural Networks
+Lifelong Learning and AGI Foundations
+Deep Learning Theory with Python Practice
+Machine Learning in Python (Pytorch)
+Generative Models (VAEs, Flows, Diffusion)

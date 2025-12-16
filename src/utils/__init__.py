@@ -7,7 +7,8 @@ from .data_loader import (
     load_cifar10,
     generate_gaussian_data,
     generate_gaussian_mixture,
-    create_dataloader
+    create_dataloader,
+    load_translation_data
 )
 
 from .visualization import (
@@ -32,6 +33,7 @@ __all__ = [
     'generate_gaussian_data',
     'generate_gaussian_mixture',
     'create_dataloader',
+    'load_translation_data',
     'plot_2d_data',
     'plot_dimensionality_reduction',
     'plot_training_curves',
