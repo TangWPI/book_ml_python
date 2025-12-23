@@ -20,7 +20,7 @@ Both synthetic (Gaussian) and real-world datasets (MNIST, CIFAR-10) are used thr
 git clone https://github.com/TangWPI/book_ml_python.git
 cd book_ml_python
 
-# Install dependencies
+# Install dependencies (virtual environment recommended, e.g., conda)
 pip install -r requirements.txt
 ```
 
