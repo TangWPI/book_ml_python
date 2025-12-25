@@ -1,6 +1,6 @@
 # Information Theory for Modern Machine Learning: Python Practice
 
-This repository contains Python implementations of various machine learning algorithms from scratch, designed as companion code for the textbook "Information Theory for Modern Machine Learning: From Theory to Python Practice." [Accessible in Amazon](https://www.amazon.com/Information-Theory-Modern-Machine-Learning-ebook/dp/B0G873VY8M) 
+This repository contains Python implementations of various **machine learning algorithms from scratch**, designed as companion code for the textbook "**Information Theory for Modern Machine Learning: From Theory to Python Practice**." [Accessible in Amazon](https://www.amazon.com/Information-Theory-Modern-Machine-Learning-ebook/dp/B0G873VY8M) 
 
 ## Overview
 
